@@ -32,16 +32,11 @@ bool Trie::searchWord(string str)
 
 int Trie::printAutoSuggestions(string str)
 {
-	searchWord(str, prefixNode);
-	if (prefixNode)
-	{
-		return printAutoSuggestions(str, prefixNode);
-	}
+
 	return 0;
 }
 
 int Trie::printAutoSuggestions(string str, TrieNode* node)
 {
-	str += 
-		if isEndWord
+	return 0;
 }

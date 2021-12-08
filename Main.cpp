@@ -28,17 +28,17 @@ int main()
 		case '1':
 			cout << "Enter a word to insert " << endl;
 			cin >> wrd;
-			tr.insert(wrd);
+			tr.insertWord(wrd);
 			break;
 		case '2':
 			cout << "Enter a word to del " << endl;
 			cin >> wrd;
-			if (!tr.del(wrd)) cout << "ERROR\n";
+			if (!tr.deleteWord(wrd)) cout << "ERROR\n";
 			break;
 		case '3':
 			cout << "Enter a word to search " << endl;
 			cin >> wrd;
-			if (tr.search(wrd))
+			if (tr.searchWord(wrd))
 				cout << "exists\n";
 			else
 				cout << "does not exist\n";

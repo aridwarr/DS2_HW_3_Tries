@@ -19,10 +19,10 @@ protected:
         Trie() {}//ctor - initialize root to be "root"
 
         //all functions
-        void insertWord(string str);
-        bool deleteWord(string str);
-        bool searchWord(string str);
-        int printAutoSuggestions(string str);
+        void insertWord(std::string str);
+        bool deleteWord(std::string str);
+        bool searchWord(std::string str);
+        int printAutoSuggestions(std::string str);
     private:
       //  bool searchWord(string str, TrieNode* node);
 

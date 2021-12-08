@@ -1,5 +1,5 @@
 #pragma once
-
+#include<string>
 
 class Trie 
 {
@@ -20,11 +20,11 @@ protected:
 
         //all functions
         void insertWord(string str);
-        void deleteWord(string str);
+        bool deleteWord(string str);
         bool searchWord(string str);
-        void printAutoSuggestions(TrieNode*);
+        int printAutoSuggestions(string str);
     private:
-        bool searchWord(string str, TrieNode* node);
+      //  bool searchWord(string str, TrieNode* node);
 
    
     };

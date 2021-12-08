@@ -1,5 +1,6 @@
 #pragma once
 #include<string>
+using namespace std;
 
 class Trie 
 {
@@ -9,14 +10,17 @@ protected:
     public:
         TrieNode* children[26] = { 0 };
         TrieNode* father;
+        char val;
         bool isEndWord = false;
         //int countChildren = 0;
     public:
-        TrieNode();
+        TrieNode(){}
+        TrieNode(char c) : val(c) {};
     };
-        TrieNode* root;
+        //TrieNode* root = new TrieNode();
   public:
-        Trie() {}//ctor - initialize root to be "root"
+      TrieNode* root;
+      Trie() { root = new TrieNode(); }//ctor - initialize root to be "root"
 
         //all functions
         void insertWord(string str);
@@ -24,6 +28,7 @@ protected:
         bool searchWord(string str);
         int printAutoSuggestions(string str);
     private:
+        int printAutoSuggestions(string str, TrieNode* node);
       //  bool searchWord(string str, TrieNode* node);
 
    

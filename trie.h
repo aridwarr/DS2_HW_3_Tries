@@ -10,9 +10,12 @@ protected:
         TrieNode* children[26] = { 0 };
         TrieNode* father;
         bool isEndWord = false;
+        char nodeValue;
         //int countChildren = 0;
     public:
         TrieNode();
+        bool hasChildren();//checks for more then 1 children
+        bool hasChild();
     };
         TrieNode* root;
   public:
@@ -23,8 +26,10 @@ protected:
         bool deleteWord(std::string str);
         bool searchWord(std::string str);
         int printAutoSuggestions(std::string str);
+        
+       
     private:
       //  bool searchWord(string str, TrieNode* node);
+       //helper
 
-   
     };

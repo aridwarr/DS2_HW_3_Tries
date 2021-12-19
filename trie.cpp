@@ -2,15 +2,14 @@
 
 void Trie::insertWord(string str)
 {
-	if (!root)
-	{
-		root = new TrieNode(str.front());
-	}
+
 	TrieNode* pos = root;
 
-	for (int i = 1; i < str.size(); i++)
+	for (int i = 0; i < str.size(); i++)
 	{
+		//move pos to appropriate index in children array - calculated by (current letter - a)
 		pos = pos->children[str[i] - 'a'];
+		//if element is null - add TrieNode with appropriate letter to children array
 		if (!pos)
 		{
 			pos = new TrieNode(str[i]);

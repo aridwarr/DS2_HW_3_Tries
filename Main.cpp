@@ -1,3 +1,7 @@
+/*Yosef Tyberg, 324710144
+* Ariel Warren, 332671197
+*/
+
 #include<iostream>
 using namespace std;
 #include <list>

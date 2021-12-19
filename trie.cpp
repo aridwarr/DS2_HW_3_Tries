@@ -19,14 +19,20 @@ void Trie::insertWord(string str)
 	pos->isEndWord = true;
 }
 
-bool Trie::deleteWord(string str)
-{
-	return false;
-}
-
 bool Trie::searchWord(string str)
 {
-	return false;
+	TrieNode* pos = root;
+	for (int i = 0; i < str.size(); i++)
+	{
+		//move pos to appropriate index in children array - calculated by (current letter - a)
+		pos = pos->children[str[i] - 'a'];
+		//if element is null return false
+		if (!pos)
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 int Trie::printAutoSuggestions(string str)
@@ -38,6 +44,23 @@ int Trie::printAutoSuggestions(string str)
 int Trie::printAutoSuggestions(string str, TrieNode* node)
 {
 	return 0;
+}
+
+bool Trie::searchWord(string str, TrieNode* node)
+{
+	TrieNode* pos = root;
+	for (int i = 0; i < str.size(); i++)
+	{
+		//move pos to appropriate index in children array - calculated by (current letter - a)
+		pos = pos->children[str[i] - 'a'];
+		//if element is null return false
+		if (!pos)
+		{
+			return false;
+		}
+	}
+	node = pos;
+	return true;
 }
 
 bool Trie::TrieNode::hasChildren() {

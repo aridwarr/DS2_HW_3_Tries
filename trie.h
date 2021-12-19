@@ -17,14 +17,13 @@ protected:
     public:
         TrieNode(){}
         TrieNode(char c) : val(c) {};
-        TrieNode();
         bool hasChildren();//checks for more then 1 children
         bool hasChild();
     };
-        //TrieNode* root = new TrieNode();
+       
   public:
       TrieNode* root;
-      Trie() { root = new TrieNode(); }//ctor - initialize root to be "root"
+      Trie() { root = new TrieNode('x'); }//ctor - initialize root to be "root"
 
         //all functions
         void insertWord(std::string str);
@@ -35,7 +34,5 @@ protected:
        
     private:
         int printAutoSuggestions(string str, TrieNode* node);
-      //  bool searchWord(string str, TrieNode* node);
-       //helper
-
+       bool searchWord(string str, TrieNode* node);
     };

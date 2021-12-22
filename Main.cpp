@@ -1,5 +1,6 @@
 /*Yosef Tyberg, 324710144
 * Ariel Warren, 332671197
+* I was sick last week so I got permission to submit this late
 */
 
 #include<iostream>
@@ -17,14 +18,16 @@ int main()
 	int comp;
 
 	cout << "\nTRIE PROGRAM" << endl;
-	cout << "\nChoose one of the following" << endl;
-	cout << "1: add a new item" << endl;
-	cout << "2: delete an item" << endl;
-	cout << "3: check if an item exists " << endl;
-	cout << "4: complete the possible item name " << endl;
-	cout << "5: exit " << endl;
+
 	do
 	{
+		
+		cout << "\nChoose one of the following" << endl;
+		cout << "1: add a new item" << endl;
+		cout << "2: delete an item" << endl;
+		cout << "3: check if an item exists " << endl;
+		cout << "4: complete the possible item name " << endl;
+		cout << "5: exit " << endl;
 		cin >> ch;
 
 		switch (ch)
@@ -61,5 +64,4 @@ int main()
 		}//switch
 	} while (ch != '5');
 	return 0;
-
 }

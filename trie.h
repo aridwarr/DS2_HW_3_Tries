@@ -10,20 +10,17 @@ protected:
     public:
         TrieNode* children[26] = { 0 };
         TrieNode* father;
-        char val;
         bool isEndWord = false;
         char nodeValue;
-        //int countChildren = 0;
+        int countChildren = 0;
     public:
         TrieNode(){}
-        TrieNode(char c) : val(c) {};
-        bool hasChildren();//checks for more then 1 children
-        bool hasChild();
+        TrieNode(char c) : nodeValue(c) {};
     };
        
   public:
       TrieNode* root;
-      Trie() { root = new TrieNode('x'); }//ctor - initialize root to be "root"
+      Trie() { root = new TrieNode(0); }//ctor - initialize root to be "root"
 
         //all functions
         void insertWord(std::string str);
@@ -33,6 +30,6 @@ protected:
         
        
     private:
-        int printAutoSuggestions(string str, TrieNode* node);
-       bool searchWord(string str, TrieNode* node);
+       void printAutoSuggestions(string str, TrieNode* node);
+       bool searchWord(string str, TrieNode*& node);
     };

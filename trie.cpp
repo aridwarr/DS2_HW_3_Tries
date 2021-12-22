@@ -1,19 +1,22 @@
 #include"trie.h"
+#include <iostream>
 
 void Trie::insertWord(string str)
 {
 
 	TrieNode* pos = root;
-
 	for (int i = 0; i < str.size(); i++)
 	{
 		//move pos to appropriate index in children array - calculated by (current letter - a)
-		pos = pos->children[str[i] - 'a'];
+		int index = str[i] - 'a';
 		//if element is null - add TrieNode with appropriate letter to children array
-		if (!pos)
+		if (!pos->children[index])
 		{
-			pos = new TrieNode(str[i]);
+			pos->children[index] = new TrieNode(str[i]);
+			pos->children[index]->father = pos;
+			pos->countChildren++;
 		}
+		pos = pos->children[index];
 		
 	}
 	pos->isEndWord = true;
@@ -32,21 +35,48 @@ bool Trie::searchWord(string str)
 			return false;
 		}
 	}
-	return true;
+	if (pos->isEndWord)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 int Trie::printAutoSuggestions(string str)
 {
 
-	return 0;
+	TrieNode* pos = root;
+	if (!searchWord(str, pos)) //check for word in trie, if present, update pos to final node in word
+	{
+		return 0;
+	}
+	printAutoSuggestions(str, pos);
+	return 1;
 }
 
-int Trie::printAutoSuggestions(string str, TrieNode* node)
+void Trie::printAutoSuggestions(string str, TrieNode* node)
 {
-	return 0;
+	if (node->isEndWord)
+	{
+		cout << str << " ";
+	}
+	if (node->countChildren == 0)
+	{
+		return;
+	}
+	for (int i = 0; i < 26; i++)
+	{ 
+		if (node->children[i])
+		{
+			printAutoSuggestions(str + node->children[i]->nodeValue, node->children[i]);
+		}
+	}
 }
 
-bool Trie::searchWord(string str, TrieNode* node)
+bool Trie::searchWord(string str, TrieNode*& node)
 {
 	TrieNode* pos = root;
 	for (int i = 0; i < str.size(); i++)
@@ -60,63 +90,38 @@ bool Trie::searchWord(string str, TrieNode* node)
 		}
 	}
 	node = pos;
-	return true;
+	if (pos->isEndWord)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
-bool Trie::TrieNode::hasChildren() {
-	int childNum = 0;
-	for (int i = 0; i < 25; i++) {
-		if (children[i] != NULL) {
-			childNum++;
-		}
-	}
-	if (childNum > 1) return true;
-	else return false;
-	
-}
-bool Trie::TrieNode::hasChild() {
-	int childNum = 0;
-	for (int i = 0; i < 25; i++) {
-		if (children[i] != NULL) {
-			childNum++;
-		}
-	}
-	if (childNum > 0) return true;
-	else return false;
-}
 
 bool Trie::deleteWord(std::string str) {
+	TrieNode* pos = root;
+	if (!searchWord(str, pos)) //check for word in trie, if present, update pos to final node in word
+	{
+		return false;
+	}
 	
-	bool inTrie = searchWord(str); //check for word in trie
-	if (inTrie == false) return inTrie;
-
-	int i;
-	for (i = 0; i < str.length(); str[i]) { //get to last node
-		root = root->children[i];
+	pos->isEndWord = false;
+	int indx = pos->nodeValue;//track index of current pos
+	//while pos isn't part of another word - isn't a wordend and has no children - delete it and move up
+	while(pos->countChildren == 0 && !pos->isEndWord && pos != root)
+	{
+		//update pos
+		pos = pos->father;
+		//delete the previous pos
+		//delete[] pos->children[indx]->children;
+		pos->children[indx] = NULL;
+		pos->countChildren--;
+		//update index to current pos
+		indx = pos->nodeValue;		
 	}
-
-	while (root->father) {
-
-		if (root->hasChildren()) {
-			root->isEndWord = false;
-			return root;
-		}
-
-		if (root->hasChild()) {
-			if (i = (str.length() - 1)) {//checks if last letter of word has children
-				root->isEndWord = false;
-				return root;
-			}
-
-			//deletion
-			root->children[i] = nullptr;
-			root->isEndWord = false;
-			root->nodeValue = NULL;
-			root = root->father;
-		}
-	}
-
-	return inTrie;
-
+	return true;
  
 }

@@ -19,6 +19,14 @@ void Trie::insertWord(string str)
 		pos = pos->children[index];
 		
 	}
+	/*I was unsure what was wanted when word is already present
+	* if(pos->isEndWord)
+	* {
+	*	  word is present, do whatever
+	*     return;
+	* }
+	* (also possible to use search at beginning of method)
+	*/
 	pos->isEndWord = true;
 }
 
@@ -49,11 +57,13 @@ int Trie::printAutoSuggestions(string str)
 {
 
 	TrieNode* pos = root;
-	if (!searchWord(str, pos)) //check for word in trie, if present, update pos to final node in word
+	searchWord(str, pos); //check for prefix in trie, if present, update pos to final node in word.
+	if (pos == root)  //if not (so pos wasn't updated - stayed equal to root) return 0 
 	{
 		return 0;
 	}
 	printAutoSuggestions(str, pos);
+	cout << endl;
 	return 1;
 }
 
